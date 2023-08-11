@@ -1,0 +1,8 @@
+{
+    "name": "Vietnam providers repository",
+    "description": "Cloudstream Vietnamese Plugin Repository",
+    "manifestVersion": 1,
+    "pluginLists": [
+      "https://raw.githubusercontent.com/motchill/oachvl/builds/plugins.json"
+    ]
+  }
