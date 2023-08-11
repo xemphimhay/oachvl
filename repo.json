@@ -3,6 +3,6 @@
     "description": "Cloudstream Vietnamese Plugin Repository",
     "manifestVersion": 1,
     "pluginLists": [
-      "https://raw.githubusercontent.com/motchill/oachvl/builds/plugins.json"
+      "https://raw.githubusercontent.com/xemphimhay/oachvl/builds/plugins.json"
     ]
   }
