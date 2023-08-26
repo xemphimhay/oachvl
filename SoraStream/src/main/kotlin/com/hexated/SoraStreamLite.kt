@@ -1,16 +1,16 @@
 package com.hexated
 
+import com.hexated.SoraExtractor.invoke2embed
 import com.hexated.SoraExtractor.invokeAnimes
 import com.hexated.SoraExtractor.invokeAsk4Movies
 import com.hexated.SoraExtractor.invokeDbgo
 import com.hexated.SoraExtractor.invokeDoomovies
+import com.hexated.SoraExtractor.invokeDramaday
 import com.hexated.SoraExtractor.invokeDreamfilm
 import com.hexated.SoraExtractor.invokeFilmxy
 import com.hexated.SoraExtractor.invokeFlixon
-import com.hexated.SoraExtractor.invokeFmovies
 import com.hexated.SoraExtractor.invokeFwatayako
 import com.hexated.SoraExtractor.invokeGoku
-import com.hexated.SoraExtractor.invokeGomovies
 import com.hexated.SoraExtractor.invokeHDMovieBox
 import com.hexated.SoraExtractor.invokeIdlix
 import com.hexated.SoraExtractor.invokeKimcartoon
@@ -32,7 +32,9 @@ import com.hexated.SoraExtractor.invokeFourCartoon
 import com.hexated.SoraExtractor.invokeMoment
 import com.hexated.SoraExtractor.invokeMultimovies
 import com.hexated.SoraExtractor.invokeNetmovies
+import com.hexated.SoraExtractor.invokePrimewire
 import com.hexated.SoraExtractor.invokeVidSrc
+import com.hexated.SoraExtractor.invokeVidsrcto
 import com.hexated.SoraExtractor.invokeWatchOnline
 import com.hexated.SoraExtractor.invokeWatchsomuch
 import com.lagradost.cloudstream3.SubtitleFile
@@ -41,8 +43,9 @@ import com.lagradost.cloudstream3.utils.AppUtils
 import com.lagradost.cloudstream3.utils.ExtractorLink
 
 class SoraStreamLite : SoraStream() {
-    override var name = "Sora-Lite"
+    override var name = "SoraStream-Lite"
     override var lang = "vi"
+
     override suspend fun loadLinks(
         data: String,
         isCasting: Boolean,
@@ -218,9 +221,8 @@ class SoraStreamLite : SoraStream() {
 //                )
 //            },
             {
-                if (!res.isAnime) invokeFmovies(
-                    res.title,
-                    res.airedYear ?: res.year,
+                if (!res.isAnime) invokeVidsrcto(
+                    res.imdbId,
                     res.season,
                     res.episode,
                     subtitleCallback,
@@ -268,7 +270,7 @@ class SoraStreamLite : SoraStream() {
                 invokeFlixon(res.id, res.imdbId, res.season, res.episode, callback)
             },
             {
-                invokeGomovies(res.title, res.year, res.season, res.episode, callback)
+                invokePrimewire(res.title, res.year, res.season, res.episode, callback)
             },
             {
                 if (!res.isAnime) invokeAsk4Movies(
@@ -343,6 +345,24 @@ class SoraStreamLite : SoraStream() {
                 if (!res.isAnime && res.season == null) invokeDoomovies(
                     res.title,
                     subtitleCallback,
+                    callback
+                )
+            },
+            {
+                if(res.isAsian) invokeDramaday(
+                    res.title,
+                    res.year,
+                    res.season,
+                    res.episode,
+                    subtitleCallback,
+                    callback
+                )
+            },
+            {
+                if(!res.isAnime) invoke2embed(
+                    res.imdbId,
+                    res.season,
+                    res.episode,
                     callback
                 )
             },

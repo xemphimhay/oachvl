@@ -9,12 +9,6 @@ data class FDMovieIFrame(
     val type: String,
 )
 
-data class BaymoviesConfig(
-    val country: String,
-    val downloadTime: String,
-    val workers: List<String>
-)
-
 data class AniIds(
     var id: Int? = null,
     var idMal: Int? = null
@@ -37,26 +31,7 @@ data class AniSearch(
     @JsonProperty("data") var data: AniData? = AniData()
 )
 
-data class Tmdb2Anilist(
-    @JsonProperty("tmdb_id") val tmdb_id: String? = null,
-    @JsonProperty("anilist_id") val anilist_id: String? = null,
-    @JsonProperty("mal_id") val mal_id: String? = null,
-)
-
-data class Movie123Media(
-    @JsonProperty("url") val url: String? = null,
-)
-
-data class Movie123Data(
-    @JsonProperty("t") val t: String? = null,
-    @JsonProperty("s") val s: String? = null,
-)
-
-data class Movie123Search(
-    @JsonProperty("data") val data: ArrayList<Movie123Data>? = arrayListOf(),
-)
-
-data class GomoviesSources(
+data class PrimewireSources(
     @JsonProperty("src") val src: String,
     @JsonProperty("file") val file: String? = null,
     @JsonProperty("label") val label: Int? = null,
@@ -202,41 +177,18 @@ data class IndexSearch(
     @JsonProperty("data") val data: IndexData? = null,
 )
 
-data class SorastreamResponse(
-    @JsonProperty("data") val data: SorastreamVideos? = null,
+data class JikanExternal(
+    @JsonProperty("name") val name: String? = null,
+    @JsonProperty("url") val url: String? = null,
 )
 
-data class SorastreamVideos(
-    @JsonProperty("mediaUrl") val mediaUrl: String? = null,
-    @JsonProperty("currentDefinition") val currentDefinition: String? = null,
+data class JikanData(
+    @JsonProperty("title") val title: String? = null,
+    @JsonProperty("external") val external: ArrayList<JikanExternal>? = arrayListOf(),
 )
 
-data class BiliBiliEpisodes(
-    @JsonProperty("id") val id: Int? = null,
-    @JsonProperty("sourceId") val sourceId: String? = null,
-    @JsonProperty("sourceEpisodeId") val sourceEpisodeId: String? = null,
-    @JsonProperty("sourceMediaId") val sourceMediaId: String? = null,
-    @JsonProperty("episodeNumber") val episodeNumber: Int? = null,
-)
-
-data class BiliBiliDetails(
-    @JsonProperty("episodes") val episodes: ArrayList<BiliBiliEpisodes>? = arrayListOf(),
-)
-
-data class BiliBiliSubtitles(
-    @JsonProperty("file") val file: String? = null,
-    @JsonProperty("lang") val lang: String? = null,
-    @JsonProperty("language") val language: String? = null,
-)
-
-data class BiliBiliSources(
-    @JsonProperty("file") val file: String? = null,
-    @JsonProperty("type") val type: String? = null,
-)
-
-data class BiliBiliSourcesResponse(
-    @JsonProperty("sources") val sources: ArrayList<BiliBiliSources>? = arrayListOf(),
-    @JsonProperty("subtitles") val subtitles: ArrayList<BiliBiliSubtitles>? = arrayListOf(),
+data class JikanResponse(
+    @JsonProperty("data") val data: JikanData? = null,
 )
 
 data class WatchOnlineItems(

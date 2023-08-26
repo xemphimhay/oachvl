@@ -1,6 +1,7 @@
 package com.hexated
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.hexated.SoraExtractor.invoke2embed
 import com.hexated.SoraExtractor.invokeAnimes
 import com.hexated.SoraExtractor.invokeAsk4Movies
 import com.hexated.SoraExtractor.invokeBollyMaza
@@ -18,14 +19,13 @@ import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import com.lagradost.cloudstream3.metaproviders.TmdbProvider
 import com.hexated.SoraExtractor.invokeDahmerMovies
 import com.hexated.SoraExtractor.invokeDoomovies
+import com.hexated.SoraExtractor.invokeDramaday
 import com.hexated.SoraExtractor.invokeDreamfilm
 import com.hexated.SoraExtractor.invokeFDMovies
 import com.hexated.SoraExtractor.invokeFlixon
-import com.hexated.SoraExtractor.invokeFmovies
 import com.hexated.SoraExtractor.invokeFwatayako
 import com.hexated.SoraExtractor.invokeGMovies
 import com.hexated.SoraExtractor.invokeGoku
-import com.hexated.SoraExtractor.invokeGomovies
 import com.hexated.SoraExtractor.invokeKisskh
 import com.hexated.SoraExtractor.invokeLing
 import com.hexated.SoraExtractor.invokeM4uhd
@@ -46,8 +46,10 @@ import com.hexated.SoraExtractor.invokeMoment
 import com.hexated.SoraExtractor.invokeMultimovies
 import com.hexated.SoraExtractor.invokeNetmovies
 import com.hexated.SoraExtractor.invokePobmovies
+import com.hexated.SoraExtractor.invokePrimewire
 import com.hexated.SoraExtractor.invokeTvMovies
 import com.hexated.SoraExtractor.invokeUhdmovies
+import com.hexated.SoraExtractor.invokeVidsrcto
 import com.hexated.SoraExtractor.invokeWatchOnline
 import com.hexated.SoraExtractor.invokeWatchsomuch
 import com.lagradost.cloudstream3.LoadResponse.Companion.addImdbId
@@ -60,7 +62,7 @@ import com.lagradost.cloudstream3.utils.ExtractorLink
 import kotlin.math.roundToInt
 
 open class SoraStream : TmdbProvider() {
-    override var name = "Sora"
+    override var name = "SoraStream"
     override val hasMainPage = true
     override var lang = "vi"
     override val instantLinkLoading = true
@@ -80,11 +82,13 @@ open class SoraStream : TmdbProvider() {
         const val anilistAPI = "https://graphql.anilist.co"
         const val malsyncAPI = "https://api.malsync.moe"
         const val consumetHelper = "https://api.consumet.org/anime/9anime/helper"
+        const val jikanAPI = "https://api.jikan.moe/v4"
 
         private val apiKey =
             base64DecodeAPI("ZTM=NTg=MjM=MjM=ODc=MzI=OGQ=MmE=Nzk=Nzk=ZjI=NTA=NDY=NDA=MzA=YjA=") // PLEASE DON'T STEAL
 
         /** ALL SOURCES */
+        const val twoEmbedAPI = "https://www.2embed.cc"
         const val vidSrcAPI = "https://v2.vidsrc.me"
         const val dbgoAPI = "https://dbgo.fun"
         const val movieHabAPI = "https://moviehab.com"
@@ -99,7 +103,7 @@ open class SoraStream : TmdbProvider() {
         const val crunchyrollAPI = "https://beta-api.crunchyroll.com"
         const val kissKhAPI = "https://kisskh.co"
         const val lingAPI = "https://ling-online.net"
-        const val uhdmoviesAPI = "https://uhdmovies.ink"
+        const val uhdmoviesAPI = "https://uhdmovies.actor"
         const val fwatayakoAPI = "https://5100.svetacdn.in"
         const val gMoviesAPI = "https://gdrivemovies.xyz"
         const val fdMoviesAPI = "https://freedrivemovie.lol"
@@ -112,9 +116,7 @@ open class SoraStream : TmdbProvider() {
         const val flixonAPI = "https://flixon.lol"
         const val smashyStreamAPI = "https://embed.smashystream.com"
         const val watchSomuchAPI = "https://watchsomuch.tv" // sub only
-        val gomoviesAPI = base64DecodeAPI("bQ==Y28=ZS4=aW4=bmw=LW8=ZXM=dmk=bW8=Z28=Ly8=czo=dHA=aHQ=")
         const val ask4MoviesAPI = "https://ask4movie.nl"
-        const val biliBiliAPI = "https://api-vn.otakuz.live/server"
         const val watchOnlineAPI = "https://watchonline.ag"
         const val nineTvAPI = "https://moviesapi.club"
         const val putlockerAPI = "https://ww7.putlocker.vip"
@@ -130,11 +132,16 @@ open class SoraStream : TmdbProvider() {
         const val netmoviesAPI = "https://netmovies.to"
         const val momentAPI = "https://moment-explanation-i-244.site"
         const val doomoviesAPI = "https://doomovies.net"
+        const val primewireAPI = "https://real-primewire.club"
+        const val vidsrctoAPI = "https://vidsrc.to"
+        const val dramadayAPI = "https://dramaday.me"
+        const val animetoshoAPI = "https://animetosho.org"
 
         // INDEX SITE
         const val dahmerMoviesAPI = "https://edytjedhgmdhm.abfhaqrhbnf.workers.dev"
         const val shinobiMovieAPI = "https://home.shinobicloud.cf/0:"
-        val cryMoviesAPI = base64DecodeAPI("ZXY=LmQ=cnM=a2U=b3I=Lnc=ZXI=ZGQ=bGE=cy0=b2I=YWM=Lmo=YWw=aW4=LWY=cm4=Ym8=cmU=Ly8=czo=dHA=aHQ=")
+        val cryMoviesAPI =
+            base64DecodeAPI("ZXY=LmQ=cnM=a2U=b3I=Lnc=ZXI=ZGQ=bGE=cy0=b2I=YWM=Lmo=YWw=aW4=LWY=cm4=Ym8=cmU=Ly8=czo=dHA=aHQ=")
 
         fun getType(t: String?): TvType {
             return when (t) {
@@ -250,8 +257,8 @@ open class SoraStream : TmdbProvider() {
         val year = releaseDate?.split("-")?.first()?.toIntOrNull()
         val rating = res.vote_average.toString().toRatingInt()
         val genres = res.genres?.mapNotNull { it.name }
-        val isAnime =
-            genres?.contains("Animation") == true && (res.original_language == "zh" || res.original_language == "ja")
+        val isAnime = genres?.contains("Animation") == true && (res.original_language == "zh" || res.original_language == "ja")
+        val isAsian = !isAnime && (res.original_language == "zh" || res.original_language == "ko")
         val keywords = res.keywords?.results?.mapNotNull { it.name }.orEmpty()
             .ifEmpty { res.keywords?.keywords?.mapNotNull { it.name } }
 
@@ -292,6 +299,7 @@ open class SoraStream : TmdbProvider() {
                                 jpTitle = res.alternative_titles?.results?.find { it.iso_3166_1 == "JP" }?.title,
                                 date = season.airDate,
                                 airedDate = res.releaseDate ?: res.firstAirDate,
+                                isAsian = isAsian,
                             ).toJson(),
                             name = eps.name + if (isUpcoming(eps.airDate)) " - [UPCOMING]" else "",
                             season = eps.seasonNumber,
@@ -338,6 +346,7 @@ open class SoraStream : TmdbProvider() {
                     isAnime = isAnime,
                     jpTitle = res.alternative_titles?.results?.find { it.iso_3166_1 == "JP" }?.title,
                     airedDate = res.releaseDate ?: res.firstAirDate,
+                    isAsian = isAsian,
                 ).toJson(),
             ) {
                 this.posterUrl = poster
@@ -474,9 +483,8 @@ open class SoraStream : TmdbProvider() {
                 )
             },
             {
-                if (!res.isAnime) invokeFmovies(
-                    res.title,
-                    res.airedYear ?: res.year,
+                if (!res.isAnime) invokeVidsrcto(
+                    res.imdbId,
                     res.season,
                     res.episode,
                     subtitleCallback,
@@ -622,7 +630,7 @@ open class SoraStream : TmdbProvider() {
                 )
             },
             {
-                invokeGomovies(res.title, res.year, res.season, res.episode, callback)
+                invokePrimewire(res.title, res.year, res.season, res.episode, callback)
             },
 //            {
 //                if (!res.isAnime) invokeGdbotMovies(
@@ -732,6 +740,19 @@ open class SoraStream : TmdbProvider() {
                     callback
                 )
             },
+            {
+                if(res.isAsian) invokeDramaday(
+                    res.title,
+                    res.year,
+                    res.season,
+                    res.episode,
+                    subtitleCallback,
+                    callback
+                )
+            },
+            {
+                if(!res.isAnime) invoke2embed(res.imdbId,res.season,res.episode,callback)
+            },
         )
 
         return true
@@ -755,6 +776,7 @@ open class SoraStream : TmdbProvider() {
         val jpTitle: String? = null,
         val date: String? = null,
         val airedDate: String? = null,
+        val isAsian: Boolean = false,
     )
 
     data class Data(
