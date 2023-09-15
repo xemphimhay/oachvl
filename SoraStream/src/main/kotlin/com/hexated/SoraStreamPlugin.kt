@@ -17,5 +17,9 @@ class SoraStreamPlugin: Plugin() {
         registerExtractorAPI(Yipsu())
         registerExtractorAPI(Mwish())
         registerExtractorAPI(TravelR())
+        registerExtractorAPI(Playm4u())
+        registerExtractorAPI(VCloud())
+        registerExtractorAPI(Pixeldra())
+        registerExtractorAPI(Hubcloud())
     }
 }
