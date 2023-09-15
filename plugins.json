@@ -1,0 +1,88 @@
+[
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=phimnhanh2.com&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/xemphimhay/oachvl",
+        "fileSize": 23072,
+        "status": 1,
+        "language": "vi",
+        "authors": [
+            "TuaSan"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "Anime",
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 11,
+        "internalName": "Phim1080",
+        "description": "Xem Phim Online Ch\u1ea5t L\u01b0\u1ee3ng Cao",
+        "url": "https://raw.githubusercontent.com/xemphimhay/oachvl/builds/Phim1080.cs3",
+        "name": "Phim1080"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=phimmoichilld.net&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/xemphimhay/oachvl",
+        "fileSize": 15831,
+        "status": 1,
+        "language": "vi",
+        "authors": [
+            "TuaSan"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "Anime",
+            "TvSeries",
+            "Movie"
+        ],
+        "version": 12,
+        "internalName": "Phimmoichill",
+        "url": "https://raw.githubusercontent.com/xemphimhay/oachvl/builds/Phimmoichill.cs3",
+        "name": "Phimmoichill"
+    },
+    {
+        "iconUrl": "https://raw.githubusercontent.com/hexated/cloudstream-extensions-hexated/master/SoraStream/Icon.png",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/xemphimhay/oachvl",
+        "fileSize": 281467,
+        "status": 1,
+        "language": "en",
+        "authors": [
+            "Hexated",
+            "Sora"
+        ],
+        "tvTypes": [
+            "AsianDrama",
+            "TvSeries",
+            "Anime",
+            "Movie"
+        ],
+        "version": 170,
+        "internalName": "SoraStream",
+        "description": "#1 best extention based on MultiAPI",
+        "url": "https://raw.githubusercontent.com/xemphimhay/oachvl/builds/SoraStream.cs3",
+        "name": "SoraStream"
+    },
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=tocanime.co&sz=%size%",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/xemphimhay/oachvl",
+        "fileSize": 13891,
+        "status": 1,
+        "language": "vi",
+        "authors": [
+            "Hexated"
+        ],
+        "tvTypes": [
+            "AnimeMovie",
+            "Anime",
+            "OVA"
+        ],
+        "version": 2,
+        "internalName": "TocanimeProvider",
+        "url": "https://raw.githubusercontent.com/xemphimhay/oachvl/builds/TocanimeProvider.cs3",
+        "name": "TocanimeProvider"
+    }
+]
