@@ -38,27 +38,6 @@
             "Movie"
         ],
         "version": 12,
-        "internalName": "Phimmoichill",
-        "url": "https://raw.githubusercontent.com/xemphimhay/oachvl/builds/Phimmoichill.cs3",
-        "name": "Phimmoichill"
-    },
-    {
-        "iconUrl": "https://www.google.com/s2/favicons?domain=phimmoichilld.net&sz=%size%",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/xemphimhay/oachvl",
-        "fileSize": 15831,
-        "status": 1,
-        "language": "vi",
-        "authors": [
-            "db"
-        ],
-        "tvTypes": [
-            "AsianDrama",
-            "Anime",
-            "TvSeries",
-            "Movie"
-        ],
-        "version": 12,
         "internalName": "Ophim",
         "url": "https://raw.githubusercontent.com/xemphimhay/oachvl/builds/OphimProvider.cs3",
         "name": "Ophim"
